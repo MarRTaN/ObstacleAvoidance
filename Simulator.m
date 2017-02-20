@@ -1,0 +1,2 @@
+radar = radarTimer;
+radar.setup();

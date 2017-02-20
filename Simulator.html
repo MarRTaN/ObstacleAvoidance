@@ -1,0 +1,53 @@
+<html>
+<head>
+    <title>Obstacle Avoidance Simulator</title>
+    <script src="script/jquery-3.1.0.min.js"></script>
+    <script src="script/scene-simulator.js"></script>
+    <script src="script/sender.js"></script>
+    <link rel="stylesheet" type="text/css" href="style/main.css">
+</head>
+<body>
+    <div class="vw-1"></div>
+    <div class="scene-cover" id="scene-cover">
+        <div class="grid-cover" id="grid-cover">
+            <div class="grid" id="map-0-0"></div>
+            <div class="user" id="user">
+            </div>
+        </div>
+    </div>
+    <div class="control-cover" id="control-cover">
+        <div class="size-panel" id="size-panel">
+            <h1>Insert map size</h1>
+            <input type="text" id="input-w" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="size" maxlength="1"> x 
+            <input type="text" id="input-h" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="size" maxlength="1">
+            <h4>(maximum 9 x 9)</h4>
+            <button class="btn-disable" id="size-btn" onclick="changeState(2);"> Next </button>
+        </div>
+        <div class="obj-panel" id="obj-panel">
+            <h1>Place the obstacles<br> into the map</h1>
+            <button onclick="changeState(1);"> Back </button>
+            <button onclick="changeState(3);"> Next </button>
+        </div>
+        <div class="start-panel" id="start-panel">
+            <h1>Everything is setup</h1>
+            <button class="start-btn" onclick="changeState(4);"> Start </button><br>
+            <button class="start-btn back-btn" onclick="changeState(2);"> Back </button>
+        </div>
+        <div class="log-panel" id="log-panel">
+            <div class="console" id="console">
+                <h1>Console</h1>
+            </div>
+            <button onclick="changeState(5);">END</button>
+        </div>
+        <div class="result-panel" id="result-panel">
+            <div id="result-info">
+                Time: 00:00 <br>
+                Obstacle: 10 <br>
+                Hit: 0 <br>
+                Avoidance Rate: 100% <br><br>
+            </div>
+            <button onclick="changeState(1);"> OK </button>
+        </div>
+    </div>
+</body>
+</html>

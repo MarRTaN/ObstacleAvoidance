@@ -1,0 +1,207 @@
+body{
+	margin: 0;
+	background: black;
+}
+
+.scene-cover{
+	width: 70%;
+	height: 100%;
+	background: #ef6c62;
+	position: absolute;
+	left: 0;
+	transition: all 1s;
+}
+
+.grid-cover{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+}
+
+.grid{
+	background: white;
+	border: solid 2px #ef6c62;
+	width: 5vw;
+	height: 5vw;
+	float: left;
+	margin-left: -2px;
+	margin-top: -2px;
+}
+
+.grid-selected-s{
+	background: #c44c43;
+}
+
+.grid-selected-m{
+	background: #27a027;
+}
+
+.grid-selected-l{
+	background: #1eaac1;
+}
+
+.collide{
+	background: #931f1c !important;
+	transition: all 0.2s;
+}
+
+.user{
+	width: 3vw;
+	height: 3vw;
+	background: #333;
+	border-radius: 3vw;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	display: none;
+
+	transform: translate(-50%,-50%);
+	transition: left 0.15s;
+	transition: top 0.15s;
+
+    -ms-transform-origin: 0% 0%; /* IE 9 */
+    -webkit-transform-origin: 0% 0%; /* Chrome, Safari, Opera */
+    transform-origin: 0% 0%;
+}
+
+.nose{
+	width: 30%;
+	height: 30%;
+	border-radius: 100%;
+	background: #333;
+	left: 50%;
+	top: -15%;
+	margin-left: -15%;
+	position: absolute;
+}
+
+.radar{
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	left: 50%;
+	margin-left: -2.5%;
+
+	-ms-transform: rotate(-135deg); /* IE 9 */
+    -ms-transform-origin: 0% 0%; /* IE 9 */
+    -webkit-transform: rotate(-135deg); /* Chrome, Safari, Opera */
+    -webkit-transform-origin: 0% 0%; /* Chrome, Safari, Opera */
+    transform: rotate(-135deg);
+    transform-origin: 0% 0%;
+
+	background: -moz-linear-gradient(135deg,  rgba(255,0,0,1) 0%, rgba(255,133,133,0) 40%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(135deg,  rgba(255,0,0,1) 0%,rgba(255,133,133,0) 40%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg,  rgba(255,0,0,1) 0%,rgba(255,133,133,0) 40%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#00ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+	display: none;
+}
+
+.control-cover{
+	width: 30%;
+	height: 100%;
+	position: absolute;
+	right: 0px;
+	background: #eee;
+	transition: all 1s;
+	text-align: center;
+}
+
+.size-panel{
+	width: 100%;
+	height: 50%;
+	top: 25%;
+	position: absolute;
+}
+
+.obj-panel{
+	width: 100%;
+	height: 30%;
+	top: 35%;
+	position: absolute;
+	display: none;
+}
+
+.log-panel{
+	width: 80%;
+	text-align: center;
+	height: 50%;
+	top:20%;
+	left: 5%;
+	position: absolute;
+	display: none;
+	padding: 5%;
+}
+
+.console{
+	width: 80%;
+	text-align: center;
+	height: 80%;
+	background: white;
+	border-radius: 10px;
+	padding: 5%;
+	margin-bottom: 10%;
+}
+
+.result-panel{
+	width: 100%;
+	text-align: center;
+	height: 30%;
+	top: 35%;
+	font-size: 1.2em;
+	position: absolute;
+	display: none;
+}
+
+.size{
+	width: 5vw;
+	height: 5vw;
+	text-align: center;
+	font-size: 2em;
+}
+
+button{
+	font-size: 1.2em;
+	color: white;
+	background: #ef6c62;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	margin: 5px;
+}
+
+button:hover{
+	background: #c44c43;
+}
+
+.start-panel{
+	width: 100%;
+	height: 30%;
+	top: 35%;
+	position: absolute;
+	display: none;
+}
+
+.start-btn{
+	font-size: 1.6em;
+	padding: 10px 50px;
+	float: top;
+}
+
+.back-btn{
+	background: #ffafa9;
+}
+.back-btn:hover{
+	background: #f9a19a;
+}
+
+.btn-disable, .btn-disable:hover{
+	background: #aaa;
+}
+
+.vw-1{
+	width: 1vw;
+	height: 1vw;
+	opacity: 0;
+	position: absolute;
+}
