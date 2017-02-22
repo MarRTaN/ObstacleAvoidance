@@ -25,7 +25,7 @@ classdef radarTimer < handle
     end
     
     properties
-        data = [0 1000];
+        data = [0 1000 0];
     end
     
     methods
@@ -73,40 +73,18 @@ classdef radarTimer < handle
             rows = length(obj.data(:,1));
             r = 1;
             
-%             disp('=============');
-%             disp(strcat('Round',num2str(obj.distance)));
-            
             while r <= rows
                 angleAzimuth = obj.data(r,1);
                 angleElevation = 0;
                 radius = obj.data(r,2);
-                
-%                 sideDistance = 0;
-                
-%                 if angleAzimuth < 0
-%                     cal = cos(degtorad(90 + angleAzimuth));
-%                     sideDistance = radius * cal;
-%                     disp(strcat('dis = ',num2str(radius),' , angle = ',num2str(angleAzimuth)));
-%                     disp(strcat('cos = ',num2str(cal),' , side = ',num2str(sideDistance)));
-%                     disp('----');
-%                 elseif angleAzimuth > 0
-%                     cal = cos(degtorad(90 - angleAzimuth));
-%                     sideDistance = radius * cal;
-%                     disp(strcat('dis = ',num2str(radius),' , angle = ',num2str(angleAzimuth)));
-%                     disp(strcat('cos = ',num2str(cal),' , side = ',num2str(sideDistance)));
-%                     disp('----');
-%                 end
-                
-%                 disp(strcat('radius = ',num2str(radius),', sideDistance = ',num2str(sideDistance),', angle = ',num2str(angleAzimuth)));
-                
+                siz = obj.data(r,3);
+                freq = 1+siz;
+                mul = freq;
+                if freq > 1
+                    mul = 1;
+                end
+               
                 if radius <= obj.detectionRange
-                    
-%                     disp(strcat(num2str(obj.userDangerSide/2),' , ',num2str(sideDistance)));
-%                     if sideDistance < obj.userDangerSide / 2
-%                         [X,Fs]= audioread('Sample/Tick-3.mp3');
-%                     else
-%                         [X,Fs]= audioread('Sample/Note-C-L.mp3');
-%                     end
                     
                     count = (angleAzimuth + 90) * obj.maxNote / 180;
                     if count - floor(count) >= 0.5
@@ -124,25 +102,15 @@ classdef radarTimer < handle
                     lenX = obj.objXLength(count);
                     newX = obj.objX(1:lenX,:,count);
                     
-                    op1 = genDirectionSound(newX, obj.objFs, radius+1, angleAzimuth, angleElevation);
-                    op2 = genDirectionSound(newX, obj.objFs, radius-1, angleAzimuth, angleElevation);
-                    op3 = genDirectionSound(newX, obj.objFs, radius, angleAzimuth, angleElevation);
-                    output = (op1 + op2 + op3) / 3;
-%                     obj.playSound(angleAzimuth * (1 - (0.4 * radius)), output, Fs);
+                    output = genDirectionSound(newX, obj.objFs, radius, angleAzimuth, angleElevation);
                     diffDis = (obj.detectionRange - radius);
                     volume = diffDis * diffDis; % the futher distance, the less volume
-                    obj.playSound(angleAzimuth, output * volume, obj.objFs);
+                    obj.playSound(angleAzimuth, output(1:floor(length(output(:,1))*mul),:) * volume, obj.objFs * freq);
                 end
                 
                 r = r+1;
                 
             end
-            
-%             obj.updateDistance();
-            
-%             if obj.distance > obj.target
-%                 stop(obj.counter);
-%             end
         end
         function obj = playSound(obj, angle, output, Fs)
             len = length(output(:,1));
@@ -156,14 +124,6 @@ classdef radarTimer < handle
             
             sound(newOutput * 0.8,Fs);
         end
-%         function obj = updateDistance(obj)
-%             obj.distance = obj.distance + obj.velocity;
-%             rows = length(obj.data(:,1));
-%             % decrese 1 z distance
-%             for r = 1:rows
-%                 obj.data(r,3) = obj.data(r,3) - obj.velocity;
-%             end
-%         end
         function obj = radarSetup(obj)
             
             [X,Fs]= audioread(obj.radarPath);

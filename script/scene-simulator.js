@@ -195,7 +195,7 @@ function changeState(state){
             "Avoidance Rate: "+avRate+"% <br><br>";
 
 		reset();
-		document.location="matlab:radar.finish();radar.data=[0 1000];";
+		document.location="matlab:radar.finish();radar.data=[0 1000 0];";
 	}
 }
 
@@ -322,9 +322,9 @@ function genObstacle(){
 		var sizeText = type.split('-')[2];
 		var size = 1;
 
-		if(sizeText == 's') 	 size = 1;
-		else if(sizeText == 'm') size = 2;
-		else if(sizeText == 'l') size = 3;
+		if(sizeText == 's') 	 size = 0.9;
+		else if(sizeText == 'm') size = 0;
+		else if(sizeText == 'l') size = -0.5;
 
 		obstacle[i] = {'id':id,'x':x,'y':y,'distance':0,'direction':0,'size':size};
 	}
@@ -434,7 +434,7 @@ function calObstacleDirection(){
 function reportData(){
 	if(currentState == 4){
 		calObstacleDirection();
-		if(report == "") document.location="matlab:radar.data=[0 1000];";
+		if(report == "") document.location="matlab:radar.data=[0 1000 0];";
 		else            document.location="matlab:radar.data=["+report+"];";
 	}
 }
